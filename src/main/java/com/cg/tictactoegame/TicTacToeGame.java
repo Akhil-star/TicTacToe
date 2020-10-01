@@ -35,11 +35,29 @@ public class TicTacToeGame {
 		System.out.println("| " + board[7] + " | " + board[8] + " | " + board[9] + " |");
 	}
 
+	// UC4movePlayer
+	private static int movePlayer() {
+		System.out.println("Enter the index you want to move(1-9) : ");
+		int index = sc.nextInt();
+		if (index > 0 && index < 10) {
+			if (board[index] == ' ') {
+				return index;
+			} else {
+				System.out.println("Cell is occupied");
+			}
+		} else {
+			System.out.println("Invalid cell");
+			movePlayer();
+		}
+		return index;
+	}
+
 	public static void main(String[] args) {
 		char playerLetter = chooseLetter();
 		char computerLetter = (playerLetter == 'X') ? 'O' : 'X';
 		System.out.println("Player's Letter : " + playerLetter + "\nComputer's Letter : " + computerLetter);
 		createBoard();
 		showBoard(board);
+		movePlayer();
 	}
 }
