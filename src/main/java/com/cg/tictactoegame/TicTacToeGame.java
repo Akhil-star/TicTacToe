@@ -107,6 +107,46 @@ public class TicTacToeGame {
 		return f;
 	}
 
+	// UC9opponentBlock
+	private static boolean checkOpponent(char[] b, char pCh, char cCh) {
+		boolean f = false;
+		if ((b[1] == pCh && b[2] == pCh) || (b[6] == pCh && b[9] == pCh)
+				|| (b[5] == pCh && b[7] == pCh) && b[3] == ' ') {
+			b[3] = cCh;
+			f = true;
+		} else if ((b[2] == pCh && b[3] == pCh) || (b[5] == pCh && b[9] == pCh)
+				|| (b[4] == pCh && b[7] == pCh) && b[1] == ' ') {
+			b[1] = cCh;
+			f = true;
+		} else if ((b[1] == pCh && b[3] == pCh) || (b[5] == pCh && b[8] == pCh) && b[2] == ' ') {
+			b[2] = cCh;
+			f = true;
+		} else if ((b[1] == pCh && b[7] == pCh) || (b[5] == pCh && b[6] == pCh) && b[4] == ' ') {
+			b[4] = cCh;
+			f = true;
+		} else if ((b[7] == pCh && b[3] == pCh) || (b[1] == pCh && b[9] == pCh)
+				|| (b[4] == pCh && b[6] == pCh) && b[5] == ' ') {
+			b[5] = cCh;
+			f = true;
+		} else if ((b[4] == pCh && b[5] == pCh) || (b[3] == pCh && b[9] == pCh) && b[6] == ' ') {
+			b[6] = cCh;
+			f = true;
+		} else if ((b[1] == pCh && b[4] == pCh) || (b[8] == pCh && b[9] == pCh)
+				|| (b[3] == pCh && b[5] == pCh) && b[7] == ' ') {
+			b[7] = cCh;
+			f = true;
+		} else if (((b[2] == pCh && b[5] == pCh) || (b[7] == pCh && b[9] == pCh)) && b[8] == ' ') {
+			b[8] = cCh;
+			f = true;
+		} else if (((b[1] == pCh && b[5] == pCh) || (b[7] == pCh && b[8] == pCh) || (b[3] == pCh && b[6] == pCh))
+				&& b[9] == ' ') {
+			b[9] = cCh;
+			f = true;
+		} else
+			System.out.println("Check corner Condition");
+		return f;
+	}
+
 	public static void main(String[] args) {
 		char playerLetter = chooseLetter();
 		char computerLetter = (playerLetter == 'X') ? 'O' : 'X';
@@ -115,6 +155,7 @@ public class TicTacToeGame {
 		showBoard(board);
 		whoStartsFirst();
 		System.out.println("check if won " + isWinner(board, playerLetter));
-		System.out.println("Computer turn "+computerTurn(board, computerLetter));
+		System.out.println("Computer turn " + computerTurn(board, computerLetter));
+		System.out.println("Opponent Block "+ checkOpponent(board, playerLetter, computerLetter));
 	}
 }
