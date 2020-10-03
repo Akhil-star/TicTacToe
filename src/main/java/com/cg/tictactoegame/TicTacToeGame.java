@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class TicTacToeGame {
 	static char[] board = new char[10];
 	static Scanner sc = new Scanner(System.in);
+	static final int HEAD = 0;
+	static final int TAIL = 1;
 
 	// UC1createBoard
 	private static char[] createBoard() {
@@ -50,8 +52,17 @@ public class TicTacToeGame {
 			System.out.println("Invalid cell");
 			makeMove(board, playerLetter);
 		}
-
 	}
+
+	// UC6toss
+	private static void whoStartsFirst() {
+		int toss = (int) Math.floor(Math.random() * 10) % 2;
+		if (toss == HEAD)
+			System.out.println("Player starts first");
+		else
+			System.out.println("Computer starts first");
+	}
+	
 
 	public static void main(String[] args) {
 		char playerLetter = chooseLetter();
@@ -59,6 +70,6 @@ public class TicTacToeGame {
 		System.out.println("Player's Letter : " + playerLetter + "\nComputer's Letter : " + computerLetter);
 		createBoard();
 		showBoard(board);
-		makeMove(board, playerLetter);
+	    whoStartsFirst();
 	}
 }
