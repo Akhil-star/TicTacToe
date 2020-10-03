@@ -29,7 +29,7 @@ public class TicTacToeGame {
 	}
 
 	// UC3showBoard
-	private static void showBoard(char[] board) {
+	private static void showBoard() {
 		System.out.println("| " + board[1] + " | " + board[2] + " | " + board[3] + " |");
 		System.out.println("|-----------|");
 		System.out.println("| " + board[4] + " | " + board[5] + " | " + board[6] + " |");
@@ -44,9 +44,9 @@ public class TicTacToeGame {
 		if (index > 0 && index < 10) {
 			if (board[index] == ' ') {
 				board[index] = playerLetter;
-				showBoard(board);
 			} else {
 				System.out.println("Cell is occupied");
+				makeMove(board, playerLetter);
 			}
 		} else {
 			System.out.println("Invalid cell");
@@ -147,7 +147,7 @@ public class TicTacToeGame {
 		return f;
 	}
 
-	//UC10cornerCondition&&UC11centerConditionandall
+	// UC10cornerCondition&&UC11centerConditionandall
 	private static boolean cornerCon(char[] b, char ch) {
 		boolean f = false;
 		if (b[1] == ' ') {
@@ -186,11 +186,31 @@ public class TicTacToeGame {
 		char computerLetter = (playerLetter == 'X') ? 'O' : 'X';
 		System.out.println("Player's Letter : " + playerLetter + "\nComputer's Letter : " + computerLetter);
 		createBoard();
-		showBoard(board);
-		whoStartsFirst();
-		System.out.println("check if won " + isWinner(board, playerLetter));
-		System.out.println("Computer turn " + computerTurn(board, computerLetter));
-		System.out.println("Opponent Block "+ checkOpponent(board, playerLetter, computerLetter));
-		System.out.println("Corner Condition "+cornerCon(board, computerLetter));
+		showBoard();
+		int toss = whoStartsFirst();
+		int i;
+		for (i = 0; i < 9; ++i, toss++) {
+			if (toss % 2 == HEAD) {
+				System.out.println("Player's turn");
+				makeMove(board, playerLetter);
+				if (isWinner(board, playerLetter)) {
+					System.out.println("Player Win");
+					break;
+				}
+			} else {
+				System.out.println("Computer turn");
+				if (!(computerTurn(board, computerLetter))) {
+					if (!(checkOpponent(board, playerLetter, computerLetter))) {
+						if (cornerCon(board, computerLetter)) {
+							if (isWinner(board, computerLetter)) {
+								System.out.println("Computer win");
+								break;
+							}
+						}
+					}
+				}
+			}
+			showBoard();
+		}
 	}
 }
