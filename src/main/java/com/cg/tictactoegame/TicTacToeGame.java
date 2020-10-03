@@ -147,6 +147,25 @@ public class TicTacToeGame {
 		return f;
 	}
 
+	//UC10cornerCondition
+	private static boolean cornerCon(char[] b, char ch) {
+		boolean f = false;
+		if (b[1] == ' ') {
+			b[1] = ch;
+			f = true;
+		} else if (b[3] == ' ') {
+			b[3] = ch;
+			f = true;
+		} else if (b[7] == ' ') {
+			b[7] = ch;
+			f = true;
+		} else if (b[9] == ' ') {
+			b[9] = ch;
+			f = true;
+		}
+		return f;
+	}
+
 	public static void main(String[] args) {
 		char playerLetter = chooseLetter();
 		char computerLetter = (playerLetter == 'X') ? 'O' : 'X';
@@ -157,5 +176,6 @@ public class TicTacToeGame {
 		System.out.println("check if won " + isWinner(board, playerLetter));
 		System.out.println("Computer turn " + computerTurn(board, computerLetter));
 		System.out.println("Opponent Block "+ checkOpponent(board, playerLetter, computerLetter));
+		System.out.println("Corner Condition "+cornerCon(board, computerLetter));
 	}
 }
