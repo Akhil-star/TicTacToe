@@ -55,14 +55,18 @@ public class TicTacToeGame {
 	}
 
 	// UC6toss
-	private static void whoStartsFirst() {
-		int toss = (int) Math.floor(Math.random() * 10) % 2;
-		if (toss == HEAD)
-			System.out.println("Player starts first");
-		else
-			System.out.println("Computer starts first");
+	private static int whoStartsFirst() {
+		int toss = (int) (Math.random() * 10) % 2;
+		return toss;
 	}
-	
+
+	// UC7wincondition
+	private static boolean isWinner(char[] b, char ch) {
+		return ((b[1] == ch && b[2] == ch && b[3] == ch) || (b[4] == ch && b[5] == ch && b[6] == ch)
+				|| (b[7] == ch && b[8] == ch && b[9] == ch) || (b[1] == ch && b[4] == ch && b[7] == ch)
+				|| (b[2] == ch && b[5] == ch && b[8] == ch) || (b[3] == ch && b[6] == ch && b[9] == ch)
+				|| (b[1] == ch && b[5] == ch && b[9] == ch) || (b[7] == ch && b[5] == ch && b[3] == ch));
+	}
 
 	public static void main(String[] args) {
 		char playerLetter = chooseLetter();
@@ -70,6 +74,7 @@ public class TicTacToeGame {
 		System.out.println("Player's Letter : " + playerLetter + "\nComputer's Letter : " + computerLetter);
 		createBoard();
 		showBoard(board);
-	    whoStartsFirst();
+		whoStartsFirst();
+		System.out.println("check if won "+isWinner(board,playerLetter));
 	}
 }
