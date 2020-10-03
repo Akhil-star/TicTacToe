@@ -182,35 +182,46 @@ public class TicTacToeGame {
 	}
 
 	public static void main(String[] args) {
-		char playerLetter = chooseLetter();
-		char computerLetter = (playerLetter == 'X') ? 'O' : 'X';
-		System.out.println("Player's Letter : " + playerLetter + "\nComputer's Letter : " + computerLetter);
-		createBoard();
-		showBoard();
-		int toss = whoStartsFirst();
-		int i;
-		for (i = 0; i < 9; ++i, toss++) {
-			if (toss % 2 == HEAD) {
-				System.out.println("Player's turn");
-				makeMove(board, playerLetter);
-				if (isWinner(board, playerLetter)) {
-					System.out.println("Player Win");
-					break;
-				}
-			} else {
-				System.out.println("Computer turn");
-				if (!(computerTurn(board, computerLetter))) {
-					if (!(checkOpponent(board, playerLetter, computerLetter))) {
-						if (cornerCon(board, computerLetter)) {
-							if (isWinner(board, computerLetter)) {
-								System.out.println("Computer win");
-								break;
+		int k = 0;
+		while (k == 0) {
+			char playerLetter = chooseLetter();
+			char computerLetter = (playerLetter == 'X') ? 'O' : 'X';
+			System.out.println("Player's Letter : " + playerLetter + "\nComputer's Letter : " + computerLetter);
+			createBoard();
+			showBoard();
+			int toss = whoStartsFirst();
+			int i;
+			for (i = 0; i < 9; ++i, toss++) {
+				if (toss % 2 == HEAD) {
+					System.out.println("Player's turn");
+					makeMove(board, playerLetter);
+					if (isWinner(board, playerLetter)) {
+						System.out.println("Player Win");
+						break;
+					}
+				} else {
+					System.out.println("Computer turn");
+					if (!(computerTurn(board, computerLetter))) {
+						if (!(checkOpponent(board, playerLetter, computerLetter))) {
+							if (cornerCon(board, computerLetter)) {
+								if (isWinner(board, computerLetter)) {
+									System.out.println("Computer win");
+									break;
+								}
 							}
 						}
 					}
 				}
+				showBoard();
 			}
-			showBoard();
+			if (i == 9) {
+				System.out.println("Game Tie");
+			} else {
+				System.out.println("Do you want to play again Yes/No");
+				String choice = sc.next();
+				if (choice != "Yes")
+					break;
+			}
 		}
 	}
 }
