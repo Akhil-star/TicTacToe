@@ -147,7 +147,7 @@ public class TicTacToeGame {
 		return f;
 	}
 
-	//UC10cornerCondition
+	//UC10cornerCondition&&UC11centerConditionandall
 	private static boolean cornerCon(char[] b, char ch) {
 		boolean f = false;
 		if (b[1] == ' ') {
@@ -161,6 +161,21 @@ public class TicTacToeGame {
 			f = true;
 		} else if (b[9] == ' ') {
 			b[9] = ch;
+			f = true;
+		} else if (b[5] == ' ') {
+			b[5] = ch;
+			f = true;
+		} else if (b[2] == ' ') {
+			b[2] = ch;
+			f = true;
+		} else if (b[4] == ' ') {
+			b[4] = ch;
+			f = true;
+		} else if (b[6] == ' ') {
+			b[6] = ch;
+			f = true;
+		} else if (b[8] == ' ') {
+			b[2] = ch;
 			f = true;
 		}
 		return f;
