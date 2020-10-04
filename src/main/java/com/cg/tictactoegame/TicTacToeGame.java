@@ -71,35 +71,44 @@ public class TicTacToeGame {
 	// UC8computerTurn
 	private static boolean computerTurn(char[] b, char ch) {
 		boolean f = false;
-		if ((b[1] == ch && b[2] == ch) || (b[6] == ch && b[9] == ch) || (b[5] == ch && b[7] == ch) && b[3] == ' ') {
+		if ((b[3] == ' ') && ((b[1] == ch && b[2] == ch) || (b[6] == ch && b[9] == ch))) {
 			b[3] = ch;
 			f = true;
-		} else if ((b[2] == ch && b[3] == ch) || (b[5] == ch && b[9] == ch)
-				|| (b[4] == ch && b[7] == ch) && b[1] == ' ') {
+		} else if ((b[1] == ' ') && ((b[2] == ch && b[3] == ch) || (b[4] == ch && b[7] == ch))) {
 			b[1] = ch;
 			f = true;
-		} else if ((b[1] == ch && b[3] == ch) || (b[5] == ch && b[8] == ch) && b[2] == ' ') {
+		} else if ((b[2] == ' ') && ((b[1] == ch && b[3] == ch) || (b[5] == ch && b[8] == ch))) {
 			b[2] = ch;
 			f = true;
-		} else if ((b[1] == ch && b[7] == ch) || (b[5] == ch && b[6] == ch) && b[4] == ' ') {
+		} else if ((b[4] == ' ') && ((b[1] == ch && b[7] == ch) || (b[5] == ch && b[6] == ch))) {
 			b[4] = ch;
 			f = true;
-		} else if ((b[7] == ch && b[3] == ch) || (b[1] == ch && b[9] == ch)
-				|| (b[4] == ch && b[6] == ch) && b[5] == ' ') {
+		} else if ((b[5] == ' ') && ((b[7] == ch && b[3] == ch) || (b[1] == ch && b[9] == ch)
+				|| (b[4] == ch && b[6] == ch) || (b[2] == ch && b[8] == ch))) {
 			b[5] = ch;
 			f = true;
-		} else if ((b[4] == ch && b[5] == ch) || (b[3] == ch && b[9] == ch) && b[6] == ' ') {
+		} else if ((b[6] == ' ') && ((b[4] == ch && b[5] == ch) || (b[3] == ch && b[9] == ch))) {
 			b[6] = ch;
 			f = true;
-		} else if ((b[1] == ch && b[4] == ch) || (b[8] == ch && b[9] == ch)
-				|| (b[5] == ch && b[3] == ch) && b[7] == ' ') {
+		} else if ((b[7] == ' ') && ((b[1] == ch && b[4] == ch) || (b[8] == ch && b[9] == ch))) {
 			b[7] = ch;
 			f = true;
-		} else if ((b[2] == ch && b[5] == ch) || (b[7] == ch && b[9] == ch) && b[8] == ' ') {
+		} else if ((b[8] == ' ') && ((b[2] == ch && b[5] == ch) || (b[7] == ch && b[9] == ch))) {
 			b[8] = ch;
 			f = true;
-		} else if ((b[1] == ch && b[5] == ch) || (b[7] == ch && b[8] == ch)
-				|| (b[3] == ch && b[6] == ch) && b[9] == ' ') {
+		} else if ((b[9] == ' ') && ((b[7] == ch && b[8] == ch) || (b[3] == ch && b[6] == ch))) {
+			b[9] = ch;
+			f = true;
+		} else if ((b[5] == ch && b[7] == ch) && b[3] == ' ') {
+			b[3] = ch;
+			f = true;
+		} else if ((b[5] == ch && b[9] == ch) && b[1] == ' ') {
+			b[1] = ch;
+			f = true;
+		} else if ((b[5] == ch && b[3] == ch) && b[7] == ' ') {
+			b[7] = ch;
+			f = true;
+		} else if ((b[5] == ch && b[1] == ch) && b[9] == ' ') {
 			b[9] = ch;
 			f = true;
 		} else
@@ -115,6 +124,6 @@ public class TicTacToeGame {
 		showBoard(board);
 		whoStartsFirst();
 		System.out.println("check if won " + isWinner(board, playerLetter));
-		System.out.println("Computer turn "+computerTurn(board, computerLetter));
+		System.out.println("Computer turn " + computerTurn(board, computerLetter));
 	}
 }
