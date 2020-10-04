@@ -7,6 +7,9 @@ public class TicTacToeGame {
 	static Scanner sc = new Scanner(System.in);
 	static final int HEAD = 0;
 	static final int TAIL = 1;
+	static String lastPlayed;
+	static String computer, player;
+	static char computerLetter, playerLetter;
 
 	// UC1createBoard
 	private static char[] createBoard() {
@@ -71,35 +74,44 @@ public class TicTacToeGame {
 	// UC8computerTurn
 	private static boolean computerTurn(char[] b, char ch) {
 		boolean f = false;
-		if ((b[1] == ch && b[2] == ch) || (b[6] == ch && b[9] == ch) || (b[5] == ch && b[7] == ch) && b[3] == ' ') {
+		if ((b[3] == ' ') && ((b[1] == ch && b[2] == ch) || (b[6] == ch && b[9] == ch))) {
 			b[3] = ch;
 			f = true;
-		} else if ((b[2] == ch && b[3] == ch) || (b[5] == ch && b[9] == ch)
-				|| (b[4] == ch && b[7] == ch) && b[1] == ' ') {
+		} else if ((b[1] == ' ') && ((b[2] == ch && b[3] == ch) || (b[4] == ch && b[7] == ch))) {
 			b[1] = ch;
 			f = true;
-		} else if ((b[1] == ch && b[3] == ch) || (b[5] == ch && b[8] == ch) && b[2] == ' ') {
+		} else if ((b[2] == ' ') && ((b[1] == ch && b[3] == ch) || (b[5] == ch && b[8] == ch))) {
 			b[2] = ch;
 			f = true;
-		} else if ((b[1] == ch && b[7] == ch) || (b[5] == ch && b[6] == ch) && b[4] == ' ') {
+		} else if ((b[4] == ' ') && ((b[1] == ch && b[7] == ch) || (b[5] == ch && b[6] == ch))) {
 			b[4] = ch;
 			f = true;
-		} else if ((b[7] == ch && b[3] == ch) || (b[1] == ch && b[9] == ch)
-				|| (b[4] == ch && b[6] == ch) && b[5] == ' ') {
+		} else if ((b[5] == ' ') && ((b[7] == ch && b[3] == ch) || (b[1] == ch && b[9] == ch)
+				|| (b[4] == ch && b[6] == ch) || (b[2] == ch && b[8] == ch))) {
 			b[5] = ch;
 			f = true;
-		} else if ((b[4] == ch && b[5] == ch) || (b[3] == ch && b[9] == ch) && b[6] == ' ') {
+		} else if ((b[6] == ' ') && ((b[4] == ch && b[5] == ch) || (b[3] == ch && b[9] == ch))) {
 			b[6] = ch;
 			f = true;
-		} else if ((b[1] == ch && b[4] == ch) || (b[8] == ch && b[9] == ch)
-				|| (b[5] == ch && b[3] == ch) && b[7] == ' ') {
+		} else if ((b[7] == ' ') && ((b[1] == ch && b[4] == ch) || (b[8] == ch && b[9] == ch))) {
 			b[7] = ch;
 			f = true;
-		} else if ((b[2] == ch && b[5] == ch) || (b[7] == ch && b[9] == ch) && b[8] == ' ') {
+		} else if ((b[8] == ' ') && ((b[2] == ch && b[5] == ch) || (b[7] == ch && b[9] == ch))) {
 			b[8] = ch;
 			f = true;
-		} else if ((b[1] == ch && b[5] == ch) || (b[7] == ch && b[8] == ch)
-				|| (b[3] == ch && b[6] == ch) && b[9] == ' ') {
+		} else if ((b[9] == ' ') && ((b[7] == ch && b[8] == ch) || (b[3] == ch && b[6] == ch))) {
+			b[9] = ch;
+			f = true;
+		} else if ((b[5] == ch && b[7] == ch) && b[3] == ' ') {
+			b[3] = ch;
+			f = true;
+		} else if ((b[5] == ch && b[9] == ch) && b[1] == ' ') {
+			b[1] = ch;
+			f = true;
+		} else if ((b[5] == ch && b[3] == ch) && b[7] == ' ') {
+			b[7] = ch;
+			f = true;
+		} else if ((b[5] == ch && b[1] == ch) && b[9] == ' ') {
 			b[9] = ch;
 			f = true;
 		} else
@@ -107,39 +119,47 @@ public class TicTacToeGame {
 		return f;
 	}
 
-	// UC9opponentBlock
+	// UC9opponentBlock&&here pCh=playerLetter and cCh=computerLetter;
 	private static boolean checkOpponent(char[] b, char pCh, char cCh) {
 		boolean f = false;
-		if ((b[1] == pCh && b[2] == pCh) || (b[6] == pCh && b[9] == pCh)
-				|| (b[5] == pCh && b[7] == pCh) && b[3] == ' ') {
+		if (((b[1] == pCh && b[2] == pCh) || (b[6] == pCh && b[9] == pCh)) && b[3] == ' ') {
 			b[3] = cCh;
 			f = true;
-		} else if ((b[2] == pCh && b[3] == pCh) || (b[5] == pCh && b[9] == pCh)
-				|| (b[4] == pCh && b[7] == pCh) && b[1] == ' ') {
+		} else if (((b[2] == pCh && b[3] == pCh) || (b[4] == pCh && b[7] == pCh)) && b[1] == ' ') {
 			b[1] = cCh;
 			f = true;
-		} else if ((b[1] == pCh && b[3] == pCh) || (b[5] == pCh && b[8] == pCh) && b[2] == ' ') {
+		} else if (((b[1] == pCh && b[3] == pCh) || (b[5] == pCh && b[8] == pCh)) && b[2] == ' ') {
 			b[2] = cCh;
 			f = true;
-		} else if ((b[1] == pCh && b[7] == pCh) || (b[5] == pCh && b[6] == pCh) && b[4] == ' ') {
+		} else if (((b[1] == pCh && b[7] == pCh) || (b[5] == pCh && b[6] == pCh)) && b[4] == ' ') {
 			b[4] = cCh;
 			f = true;
-		} else if ((b[7] == pCh && b[3] == pCh) || (b[1] == pCh && b[9] == pCh)
-				|| (b[4] == pCh && b[6] == pCh) && b[5] == ' ') {
+		} else if (((b[7] == pCh && b[3] == pCh) || (b[1] == pCh && b[9] == pCh)
+				|| (b[4] == pCh && b[6] == pCh) && (b[2] == pCh && b[8] == pCh)) && b[5] == ' ') {
 			b[5] = cCh;
 			f = true;
-		} else if ((b[4] == pCh && b[5] == pCh) || (b[3] == pCh && b[9] == pCh) && b[6] == ' ') {
+		} else if (((b[4] == pCh && b[5] == pCh) || (b[3] == pCh && b[9] == pCh)) && b[6] == ' ') {
 			b[6] = cCh;
 			f = true;
-		} else if ((b[1] == pCh && b[4] == pCh) || (b[8] == pCh && b[9] == pCh)
-				|| (b[3] == pCh && b[5] == pCh) && b[7] == ' ') {
+		} else if (((b[1] == pCh && b[4] == pCh) || (b[8] == pCh && b[9] == pCh)) && b[7] == ' ') {
 			b[7] = cCh;
 			f = true;
 		} else if (((b[2] == pCh && b[5] == pCh) || (b[7] == pCh && b[9] == pCh)) && b[8] == ' ') {
 			b[8] = cCh;
 			f = true;
-		} else if (((b[1] == pCh && b[5] == pCh) || (b[7] == pCh && b[8] == pCh) || (b[3] == pCh && b[6] == pCh))
-				&& b[9] == ' ') {
+		} else if (((b[7] == pCh && b[8] == pCh) || (b[3] == pCh && b[6] == pCh)) && b[9] == ' ') {
+			b[9] = cCh;
+			f = true;
+		} else if ((b[5] == pCh && b[7] == pCh) && b[3] == ' ') {
+			b[3] = cCh;
+			f = true;
+		} else if ((b[5] == pCh && b[9] == pCh) && b[1] == ' ') {
+			b[1] = cCh;
+			f = true;
+		} else if ((b[5] == pCh && b[3] == pCh) && b[7] == ' ') {
+			b[7] = cCh;
+			f = true;
+		} else if ((b[5] == pCh && b[1] == pCh) && b[9] == ' ') {
 			b[9] = cCh;
 			f = true;
 		} else
@@ -150,11 +170,11 @@ public class TicTacToeGame {
 	// UC10cornerCondition&&UC11centerConditionandall
 	private static boolean cornerCon(char[] b, char ch) {
 		boolean f = false;
-		if (b[1] == ' ') {
-			b[1] = ch;
-			f = true;
-		} else if (b[3] == ' ') {
+		if (b[3] == ' ') {
 			b[3] = ch;
+			f = true;
+		} else if (b[1] == ' ') {
+			b[1] = ch;
 			f = true;
 		} else if (b[7] == ' ') {
 			b[7] = ch;
@@ -175,53 +195,73 @@ public class TicTacToeGame {
 			b[6] = ch;
 			f = true;
 		} else if (b[8] == ' ') {
-			b[2] = ch;
+			b[8] = ch;
 			f = true;
 		}
 		return f;
 	}
 
-	public static void main(String[] args) {
+    //FullCode
+	private static void winner() {
 		int k = 0;
 		while (k == 0) {
+			createBoard();
+			showBoard();
 			char playerLetter = chooseLetter();
 			char computerLetter = (playerLetter == 'X') ? 'O' : 'X';
 			System.out.println("Player's Letter : " + playerLetter + "\nComputer's Letter : " + computerLetter);
-			createBoard();
-			showBoard();
 			int toss = whoStartsFirst();
 			int i;
-			for (i = 0; i < 9; ++i, toss++) {
+			for (i = 1; i < 10; ++i, toss++) {
 				if (toss % 2 == HEAD) {
+					// if (lastPlayed == computer) {
 					System.out.println("Player's turn");
 					makeMove(board, playerLetter);
+					showBoard();
 					if (isWinner(board, playerLetter)) {
 						System.out.println("Player Win");
 						break;
 					}
 				} else {
-					System.out.println("Computer turn");
-					if (!(computerTurn(board, computerLetter))) {
-						if (!(checkOpponent(board, playerLetter, computerLetter))) {
-							if (cornerCon(board, computerLetter)) {
-								if (isWinner(board, computerLetter)) {
-									System.out.println("Computer win");
-									break;
-								}
-							}
+					System.out.println("Computer's turn");
+					if (computerTurn(board, computerLetter)) {
+						showBoard();
+						if (isWinner(board, computerLetter)) {
+							System.out.println("Computer win");
+							break;
+						}
+					} else if (checkOpponent(board, playerLetter, computerLetter)) {
+						showBoard();
+						if (isWinner(board, computerLetter)) {
+							System.out.println("Computer win");
+							break;
+						}
+					} else if (cornerCon(board, computerLetter)) {
+						showBoard();
+						if (isWinner(board, computerLetter)) {
+							System.out.println("Computer win");
+							break;
 						}
 					}
 				}
-				showBoard();
 			}
-			if (i == 9) {
+			if (i == 10) {
 				System.out.println("Game Tie");
+				System.out.println("Do you want to play again Y/N");
+				char choice = Character.toUpperCase(sc.next().charAt(0));
+				if (choice != 'Y')
+					break;
+
 			} else {
-				System.out.println("Do you want to play again Yes/No");
-				String choice = sc.next();
-				if (choice != "Yes")
+				System.out.println("Do you want to play again Y/N");
+				char choice = Character.toUpperCase(sc.next().charAt(0));
+				if (choice != 'Y')
 					break;
 			}
 		}
+	}
+
+	public static void main(String[] args) {
+		winner();
 	}
 }
